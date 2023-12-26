@@ -25,9 +25,8 @@ def shukutaiMintEgg(walletID, amount, finalPercent):
         weightsTuple = (finalPercent[0], finalPercent[1], finalPercent[2], finalPercent[3])
         randomRarity = random.choices(["Common", "Uncommon", "Rare", "Legendary"], weights=weightsTuple, k=1)[0]
         arweaveURL = rarityList[randomRarity]
-
-        text_file = open("./SHUKUTAIKEYPAIR.json", "r")
-        lines = text_file.read()[1:-1].split(',')
+        with open("./SHUKUTAIKEYPAIR.json", "r") as text_file:
+            lines = text_file.read()[1:-1].split(',')
         key_from_file = [int(x) for x in lines]
         keypair = Keypair(key_from_file[:32])
         pubKey = PublicKey(walletID)
