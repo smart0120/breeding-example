@@ -46,7 +46,7 @@ def shukutaiMintEgg(walletID, amount, finalPercent):
         urlConfirm = "BACK END TO CHECK TRANSACTION CONFIRMATIONS HERE" 
         headersConfirm = {'content-type': 'application/json'}
         myobjConfirm = {'tx': resultJSON["result"]}
-        confirmations = requests.post(urlConfirm, data=json.dumps(myobjConfirm), headers=headersConfirm)
+        confirmations = requests.post(urlConfirm, data=json.dumps(myobjConfirm), headers=headersConfirm, timeout=60)
         confirmations = confirmations.json()
         if "blockTime" in confirmations.keys():
             finalized = True
@@ -55,7 +55,7 @@ def shukutaiMintEgg(walletID, amount, finalPercent):
             result = api.deploy(api_endpoint, "Shukutai Dino Egg", "SHUK", fees=700)
             resultJSON = json.loads(result)
             myobjConfirm = {'tx': resultJSON["result"]}
-            confirmations = requests.post(urlConfirm, data=json.dumps(myobjConfirm), headers=headersConfirm)
+            confirmations = requests.post(urlConfirm, data=json.dumps(myobjConfirm), headers=headersConfirm, timeout=60)
             confirmations = confirmations.json()
             if "blockTime" in confirmations.keys():
                 finalized = True
