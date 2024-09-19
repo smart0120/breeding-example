@@ -12,7 +12,7 @@ from solana.keypair import Keypair
 from solana.publickey import PublicKey
 from cryptography.fernet import Fernet
 import api.metaplex_api as metaplex_api
-import random
+import secrets
 
 def shukutaiMintEgg(walletID, amount, finalPercent):
     for i in range(amount):
@@ -23,7 +23,7 @@ def shukutaiMintEgg(walletID, amount, finalPercent):
             "Legendary": "https://arweave.net/kgCvY7jiVdYWoVKqLBujtOzYBENFRJJqIvafSCKXfiw?ext=json",
         }
         weightsTuple = (finalPercent[0], finalPercent[1], finalPercent[2], finalPercent[3])
-        randomRarity = random.choices(["Common", "Uncommon", "Rare", "Legendary"], weights=weightsTuple, k=1)[0]
+        randomRarity = secrets.SystemRandom().choices(["Common", "Uncommon", "Rare", "Legendary"], weights=weightsTuple, k=1)[0]
         arweaveURL = rarityList[randomRarity]
 
         text_file = open("./SHUKUTAIKEYPAIR.json", "r")
